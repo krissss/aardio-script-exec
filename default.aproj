@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project ver="10" name="script-exec" libEmbed="true" icon="..." ui="win" output="script-exec.exe" CompanyName="单位名称" FileDescription="script-exec" LegalCopyright="Copyright (C) 作者 2022" ProductName="script-exec" InternalName="script-exec" FileVersion="0.0.0.04" ProductVersion="0.0.0.04" publishDir="/dist/" dstrip="false">
+<project ver="10" name="script-exec" libEmbed="true" icon="res\icon.ico" ui="win" output="script-exec.exe" CompanyName="Kriss" FileDescription="script-exec" LegalCopyright="Copyright (C) Kriss 2022" ProductName="脚本执行器" InternalName="script-exec" FileVersion="0.0.1.01" ProductVersion="0.0.1.01" publishDir="/dist/" dstrip="false">
 	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
-	<folder name="资源文件" path="res" embed="true" local="false" ignored="false"/>
+	<folder name="资源文件" path="res" embed="true" local="false" ignored="false">
+		<file name="icon.ico" path="res\icon.ico" comment="res\exec.ico"/>
+	</folder>
 	<folder name="窗体文件" path="dlg" comment="目录" embed="true" local="false" ignored="false">
 		<file name="console.aardio" path="dlg\console.aardio" comment="dlg\console.aardio"/>
 	</folder>
