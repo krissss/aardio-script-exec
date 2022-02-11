@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project ver="10" name="script-exec" libEmbed="true" icon="..." ui="win" output="script-exec.exe" CompanyName="单位名称" FileDescription="script-exec" LegalCopyright="Copyright (C) 作者 2022" ProductName="script-exec" InternalName="script-exec" FileVersion="0.0.0.04" ProductVersion="0.0.0.04" publishDir="/dist/" dstrip="false">
+	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
+	<folder name="资源文件" path="res" embed="true" local="false" ignored="false"/>
+	<folder name="窗体文件" path="dlg" comment="目录" embed="true" local="false" ignored="false">
+		<file name="console.aardio" path="dlg\console.aardio" comment="dlg\console.aardio"/>
+	</folder>
+	<folder name="网页资源" path="web" embed="true" comment="目录" local="true" ignored="false"/>
+	<folder name="网页源码" path="web-src" embed="false" comment="目录" local="true" ignored="true"/>
+</project>

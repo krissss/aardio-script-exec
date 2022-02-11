@@ -1,0 +1,18 @@
+import win.ui;
+/*DSG{{*/
+var winform = win.form(text="aardio form";right=754;bottom=488)
+winform.add(
+btnAutoScroll={cls="button";text="自动滚动";left=615;top=437;right=733;bottom=462;z=2};
+edit={cls="edit";left=25;top=19;right=733;bottom=422;autohscroll=false;bgcolor=16777215;db=1;dl=1;dr=1;dt=1;edge=1;multiline=1;vscroll=1;z=1}
+)
+/*}}*/
+
+winform.btnAutoScroll.text = winform.btnAutoScroll.text + ':' 
+
+winform.btnAutoScroll.oncommand = function(id,event){
+	//winform.edit.
+}
+
+winform.show();
+win.loopMessage();
+return winform;

@@ -1,0 +1,87 @@
+import win.ui;
+/*DSG{{*/
+var winform = win.form(text="脚本执行器";right=579;bottom=369;max=false)
+winform.add()
+/*}}*/
+
+import web.view;
+var wb = web.view(winform);
+
+import fsys.table;
+var setting = fsys.table("/setting.table") 
+setting.load();
+
+wb.external = {
+	isDebug = function(){
+		return _STUDIO_INVOKED; 
+	}
+	file_choose = function(文件类型, 标题){
+		if (文件类型 == 'dir') {
+			import fsys.dlg.dir
+			return fsys.dlg.dir(,winform,标题);	
+		}
+		import fsys.dlg
+		return fsys.dlg.open(文件类型,标题,,winform)
+	}
+	cmd_history_save = function(data){
+		setting.cmd_history = data
+		setting.save()
+	}
+	cmd_history_get = function(){
+		return setting.cmd_history; 
+	}
+	cmd_exec = function(cmd, title){
+		var consoleWin = winform.loadForm("\dlg\console.aardio");
+		consoleWin.show();
+		consoleWin.text=title
+		consoleWin.edit.print(cmd)
+		
+		import process.popen
+		var prcs = process.popen.ps(cmd)
+		if(!prcs){
+			import console
+        	console.log('错误的命令行或参数');
+        	return;
+    	}
+		consoleWin.onClose=function() {
+			// 关闭时结束进程
+			prcs.ctrlEvent(0)
+			prcs.terminate()
+		}
+    	prcs.logResponse(consoleWin.edit)
+	}
+}
+
+wb.export({
+	toast = function(msg, mType='success', timeout = 1000){
+		import win.dlg.message
+		var dlgM = win.dlg.message()
+		if (mType == 'info') {
+			dlgM.info(msg, timeout)
+		} elseif(mType == 'error'){
+			dlgM.err(msg, timeout)
+		} elseif(mType == 'success'){
+			dlgM.ok(msg, timeout)
+		}
+	}
+})
+
+var url
+if (_STUDIO_INVOKED) {
+	import web.rest.client;
+	url = "http://localhost:3000/web/"
+} else {
+	import wsock.tcp.simpleHttpServer
+	url = wsock.tcp.simpleHttpServer.startUrl("/web/index.html")
+}
+wb.go(url)
+
+// 注册方法到 winform，提供给 main 使用
+winform.wb = wb
+winform.wbGoTo = function(route) {
+	wb.go(url + "#" + route)
+}
+
+winform.show();
+win.loopMessage();
+return winform;
