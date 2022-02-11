@@ -1,3 +1,11 @@
+# 脚本执行器
+
+为了方便快速执行（点一下）就执行常用的命令
+
+# Screenshot
+
+![image](./ignore-source/screenshot.png)
+
 # dev
 
 ```bash
