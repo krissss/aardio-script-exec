@@ -32,23 +32,7 @@ wb.external = {
 	}
 	cmd_exec = function(cmd, title){
 		var consoleWin = winform.loadForm("\dlg\console.aardio");
-		consoleWin.show();
-		consoleWin.text=title
-		consoleWin.edit.print(cmd)
-		
-		import process.popen
-		var prcs = process.popen.ps(cmd)
-		if(!prcs){
-			import console
-        	console.log('错误的命令行或参数');
-        	return;
-    	}
-		consoleWin.onClose=function() {
-			// 关闭时结束进程
-			prcs.ctrlEvent(0)
-			prcs.terminate()
-		}
-    	prcs.logResponse(consoleWin.edit)
+		consoleWin.start(winform, title, cmd)
 	}
 }
 

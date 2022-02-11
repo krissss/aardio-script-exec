@@ -1,18 +1,85 @@
 import win.ui;
 /*DSG{{*/
-var winform = win.form(text="aardio form";right=754;bottom=488)
+var winform = win.form(text="aardio form";right=749;bottom=529)
 winform.add(
-btnAutoScroll={cls="button";text="自动滚动";left=615;top=437;right=733;bottom=462;z=2};
-edit={cls="edit";left=25;top=19;right=733;bottom=422;autohscroll=false;bgcolor=16777215;db=1;dl=1;dr=1;dt=1;edge=1;multiline=1;vscroll=1;z=1}
+btnClean={cls="button";text="清空";left=115;top=56;right=185;bottom=83;color=15793151;dl=1;z=4};
+btnExec={cls="button";text="执行";left=25;top=56;right=95;bottom=83;color=15793151;dl=1;z=2};
+editCmd={cls="edit";left=25;top=17;right=725;bottom=44;dl=1;dr=1;dt=1;edge=1;z=3};
+editLog={cls="edit";left=25;top=95;right=724;bottom=502;ah=1;autohscroll=false;aw=1;bgcolor=16777215;db=1;dl=1;dr=1;edge=1;multiline=1;vscroll=1;z=1}
 )
 /*}}*/
 
-winform.btnAutoScroll.text = winform.btnAutoScroll.text + ':' 
-
-winform.btnAutoScroll.oncommand = function(id,event){
-	//winform.edit.
+var cmdManager = {
+	prcs
+	start = function(cmd){
+		winform.btnExec.text='停止'
+		winform.btnExec.canStop=true
+		
+		winform.editLog.print('----start----')
+		
+		import process.popen
+		owner.prcs = process.popen.ps(cmd)
+		if(!owner.prcs){
+			import console
+        	console.log('错误的命令行或参数');
+        	return;
+    	}
+    	owner.prcs.logResponse(winform.editLog, 100)
+    	if (owner.prcs.waitOne()) {
+        	sleep(200)
+    		owner.stop()
+    	}
+	}
+	stop = function(){
+		if (owner.prcs) {
+			owner.prcs.ctrlEvent(0)
+			owner.prcs.terminate()
+			owner.prcs = null
+    	}
+    	
+    	winform.editLog.print('----end----')
+    
+    	winform.btnExec.text='执行'
+		winform.btnExec.canStop=false
+	}
 }
 
-winform.show();
+winform.start = function(parent, title, cmd){
+	if (parent) {
+		winform.top=parent.top+40
+		winform.left=parent.left+40
+		winform.width=750
+		winform.height=530
+	}
+	winform.text=title
+	winform.editCmd.text=cmd
+		
+	winform.show()
+	winform.onClose = function() {
+		cmdManager.stop()
+	}
+	
+	cmdManager.start(cmd)
+}
+
+winform.btnExec.oncommand = function(id,event){
+	if (winform.btnExec.canStop) {
+		cmdManager.stop()
+		return
+	}
+	cmdManager.start(winform.editCmd.text)
+}
+
+winform.btnClean.oncommand = function(id,event){
+	winform.editLog.text=''
+}
+
+var test = false
+winform.show(!test);
+if (test) {
+	winform.start(null,'测试',"tail -f F:\laragon\www\yzc\src\Commands\Kernel.php")
+	//winform.start(null,'测试',"php -m")
+}
+
 win.loopMessage();
 return winform;
