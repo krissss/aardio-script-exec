@@ -17,6 +17,8 @@ export default defineConfig({
   ],
   base: '/web/',
   build: {
-    outDir: '../web'
+    outDir: '../web',
+    emptyOutDir: true,
+    target: 'esnext',
   },
 })

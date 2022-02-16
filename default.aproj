@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project ver="10" name="script-exec" libEmbed="true" icon="res\icon.ico" ui="win" output="script-exec.exe" CompanyName="Kriss" FileDescription="script-exec" LegalCopyright="Copyright (C) Kriss 2022" ProductName="脚本执行器" InternalName="script-exec" FileVersion="0.0.1.01" ProductVersion="0.0.1.01" publishDir="/dist/" dstrip="false">
+<project ver="10" name="script-exec" libEmbed="true" icon="res\icon.ico" ui="win" output="script-exec.exe" CompanyName="Kriss" FileDescription="script-exec" LegalCopyright="Copyright (C) Kriss 2022" ProductName="脚本执行器" InternalName="script-exec" FileVersion="0.0.1.02" ProductVersion="0.0.1.02" publishDir="/dist/" dstrip="false" local="false" ignored="false">
 	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
 	<folder name="资源文件" path="res" embed="true" local="false" ignored="false">
 		<file name="icon.ico" path="res\icon.ico" comment="res\exec.ico"/>
