@@ -34,21 +34,21 @@
   </el-form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue'
-import { useStore } from '../stores/cmd.js'
+import { Ref, ref, watch } from 'vue'
+import { useStore } from '../stores/cmd'
 
 const store = useStore()
-const form = ref(Object.assign({}, store.current))
+const form: Ref<CMD> = ref(Object.assign({}, store.current))
 
 const { current } = storeToRefs(store)
 watch(current, (val) => {
   form.value = Object.assign({}, val)
 })
 
-const choose = async (attr, type, lable = '选择文件') => {
-  const path = await aardio.file_choose(type, lable)
+const choose = async (attr: string, type: string, label: string = '选择文件') => {
+  const path = await aardio.file_choose(type, label)
   if (path) {
     form.value[attr] = path
   }

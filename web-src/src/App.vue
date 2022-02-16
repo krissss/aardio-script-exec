@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import CreateConfig from './components/CreateConfig.vue';
 import AppMenu from './components/AppMenu.vue';
 </script>

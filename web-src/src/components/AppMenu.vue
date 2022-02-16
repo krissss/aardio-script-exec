@@ -8,7 +8,7 @@
   </ul>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import { useStore } from '../stores/cmd'
 import { Delete } from '@element-plus/icons-vue'
